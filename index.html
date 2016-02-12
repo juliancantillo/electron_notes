@@ -1,13 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="" ng-app="notesApp">
   <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Electron Notes</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/controllers.js"></script>
+    <script src="js/services/storage.js"></script>
+    <script src="js/services/notes.js"></script>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Electron Notes</a>
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <button ng-click="addItem()" class="btn btn-primary">Add</button>
+          </li>
+          <li>
+            <button ng-click="showRemoveButtons()" class="btn btn-primary">Remove</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fuild">
+      <div class="col-xs-4" ng-controller="listCtrl">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <form class="form-inline">
+                <div class="form-group">
+                  <input type="text" class="form-control" ng-model="searchText">
+                </div>
+              </form>
+            </h3>
+          </div>
+          <ul class="list-group">
+            <li ng-repeat="note in notes | filter:searchText " class="list-group-item">
+              <a ng-href="#/view/{{note.created_at}}" ng-bind="note.title"></a>
+              <button class="btn btn-xs pull-right btn-danger" ng-show="enable_remove" ng-click="removeItem($index)"><i class="glyphicon glyphicon-remove"></i></button>
+              <button class="btn btn-xs pull-right btn-info" ng-click="bookmarkItem($index)"><i class="glyphicon" ng-class="{'glyphicon-star-empty': !note.bookmarked_at, 'glyphicon-star': note.bookmarked_at}" aria-hidden="true"></i></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div ng-view class="col-xs-8"></div>
+    </div>
   </body>
 </html>

@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="col-sm-12">
+    <span ng-show="note.bookmarked_at"><i class="glyphicon glyphicon-star" aria-hidden="true"></i></span>
+    <span class="text-mute pull-right">{{ note.created_at | date }}</span>
+    <form name="newNote" class="form-vertical">
+      <div class="form-group">
+        <textarea ng-model="note.text" name="note" id="noteText" class="form-control"></textarea>
+      </div>
+    </form>
+  </div>
+</div>
