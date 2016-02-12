@@ -1,0 +1,45 @@
+body{
+	height: 100%;
+}
+
+.toolBar{
+	padding: 10px 15px;
+}
+
+.left-bar{
+	position: fixed;
+	height: 100%;
+}
+
+.main-view{
+	position: fixed;
+	right: 0px;
+	top: 0px;
+}
+
+.main-textarea{
+	border: none;
+	box-shadow: none;
+	margin: 10px;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.scrollable-content{
+	position: relative;
+	height: 435px;
+	overflow-y: scroll;
+}
+
+.scrollable-content .scrollable{
+
+}
+
+.main-view .form-group{
+	height: 542px;
+	position: relative;
+}

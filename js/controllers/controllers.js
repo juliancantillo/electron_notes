@@ -54,8 +54,6 @@ angular.module('app.controllers',[])
 	var idx = $routeParams.id,
 	  savePromise = null;
 
-	console.log(idx);
-
 	$scope.note = Note.get(idx);
 
 	if (!$scope.note) {
@@ -71,7 +69,6 @@ angular.module('app.controllers',[])
 	});
 
 	var saveNote = function (note) {
-		console.log('saved');
 		$scope.note = Note.save(note);
 
 		$rootScope.$broadcast('updateList');

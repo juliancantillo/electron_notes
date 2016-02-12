@@ -9,6 +9,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+
+    <link rel="stylesheet" href="css/style.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -23,41 +25,34 @@
     <script src="js/services/notes.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Electron Notes</a>
-        <ul class="nav navbar-nav">
-          <li class="active">
-            <button ng-click="addItem()" class="btn btn-primary">Add</button>
-          </li>
-          <li>
-            <button ng-click="showRemoveButtons()" class="btn btn-primary">Remove</button>
-          </li>
-        </ul>
-      </div>
-    </nav>
     <div class="container-fuild">
-      <div class="col-xs-4" ng-controller="listCtrl">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              <form class="form-inline">
-                <div class="form-group">
-                  <input type="text" class="form-control" ng-model="searchText">
-                </div>
-              </form>
-            </h3>
+        <div class="col-xs-4 left-bar" ng-controller="listCtrl">
+          <div class="toolBar">
+            <button ng-click="addItem()" class="btn btn-primary">Add</button>
+            <button ng-click="showRemoveButtons()" class="btn btn-primary">Remove</button>
           </div>
-          <ul class="list-group">
-            <li ng-repeat="note in notes | filter:searchText " class="list-group-item">
-              <a ng-href="#/view/{{note.created_at}}" ng-bind="note.title"></a>
-              <button class="btn btn-xs pull-right btn-danger" ng-show="enable_remove" ng-click="removeItem($index)"><i class="glyphicon glyphicon-remove"></i></button>
-              <button class="btn btn-xs pull-right btn-info" ng-click="bookmarkItem($index)"><i class="glyphicon" ng-class="{'glyphicon-star-empty': !note.bookmarked_at, 'glyphicon-star': note.bookmarked_at}" aria-hidden="true"></i></button>
-            </li>
-          </ul>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <input type="text" placeholder="Search" class="form-control" ng-model="searchText">
+                  </div>
+                </form>
+              </h3>
+            </div>
+            <div class="scrollable-content">
+              <ul class="scrollable list-group">
+                <li ng-repeat="note in notes | filter:searchText " class="list-group-item">
+                  <a ng-href="#/view/{{note.created_at}}" ng-bind="note.title"></a>
+                  <button class="btn btn-xs pull-right btn-danger" ng-show="enable_remove" ng-click="removeItem($index)"><i class="glyphicon glyphicon-remove"></i></button>
+                  <button class="btn btn-xs pull-right btn-info" ng-click="bookmarkItem($index)"><i class="glyphicon" ng-class="{'glyphicon-star-empty': !note.bookmarked_at, 'glyphicon-star': note.bookmarked_at}" aria-hidden="true"></i></button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-      <div ng-view class="col-xs-8"></div>
+        <div ng-view class="main-view col-xs-8"></div>
     </div>
   </body>
 </html>
